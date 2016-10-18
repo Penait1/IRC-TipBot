@@ -1,7 +1,9 @@
 # IRC-TipBot
+
 IRC Bot which lets users send cryptocurrency via their IRC Nicknames.
 
 ## About
+
 By using this tipbot you are responsible for the user funds that it contains. While it has not been hacked yet,
 I don't know if there was even an attempt to do so. While there are some failguards, like a check before each command
 issued by an user if there is a balance in the database < 0, please be carefull with storing lots of crypto in this bot.
@@ -9,6 +11,38 @@ issued by an user if there is a balance in the database < 0, please be carefull 
 This tipbot is written in Java. It uses the PircBotX plugin to handle connections to the IRC network/User input. 
 Further it uses a MySQL database to save everyones account/balance. I used Hibernate as ORM. 
 
+## Features
+
+- Send cryptocurrency to any nickname in IRC that is identified by NickServ. Person being tipped has to be identified too.
+- Being able to enable/disable commands while the bot is running. 
+- Checks with every user issued command if there is a negative balance in the database, if there is shutdown bot. A negative   balance indicates a bug being abused. 
+- Keeps a cache with identified users so it doesn't have to query NickServ as often.
+- Email notification upon deposit/withdrawel from users and upon exceptions. 
+
+## Commands
+
+#### User commands
+
+(Almost) Every command has to be issued by an user who is identified with NickServ. Also the users being tipped.
+
+- !tipbot, shows information about the tipbot to the user. 
+- !balance, outsputs the current balance to the user. Also shows the unconfirmed balance. 
+- !tip [username] [amount], sends [amount] of coins to [username].
+- !deposit, generates an unique address for the user to deposit to.
+- !withdraw [address] [amount], withdraws [amount] to [address]. Substracts a fee configured by the bot owner.
+
+#### Admin commands
+
+These commands have to be issued by an OP and have to be sent to the bot in private message.
+
+- !stop, disconnects the bot from the server.
+- !say [message], lets the bot output [message] in the connected channel.
+- !rejoin, rejoins the configured channel.
+- !disable [command], disables a command so it can't be used anymore. [command] has to include the !, 
+  for example: !disable !balance
+- !enable [command], enables a command so it can be used again. [command] has to include the !, 
+  for example: !enable !balance
+  
 ## Setup
 
 - A websocket is listening on port 5566 for incomming transactions (deposits/withdraws). This needs to be set in your crypto daemon settings.
