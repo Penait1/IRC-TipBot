@@ -18,6 +18,7 @@ Further it uses a MySQL database to save everyones account/balance. I used Hiber
 - Checks with every user issued command if there is a negative balance in the database, if there is shutdown bot. A negative   balance indicates a bug being abused. 
 - Keeps a cache with identified users so it doesn't have to query NickServ as often.
 - Email notification upon deposit/withdrawel from users and upon exceptions. 
+- Users will be notified when their deposit has been cleared only when they are logged in. If the deposit hasn't been cleared   yet they can check their unconfirmed balance with the !balance command.
 
 ## Commands
 
