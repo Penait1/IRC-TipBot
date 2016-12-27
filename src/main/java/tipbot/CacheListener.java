@@ -39,7 +39,7 @@ public class CacheListener extends ListenerAdapter {
         if (userIdentified == true) {
             User user = userService.getOrCreateUser(event.getUser().getNick());
 
-            if (user.getCoins().compareTo(TipBot.MIN_WITHDRAW) == 0 || user.getCoins().compareTo(TipBot.MIN_WITHDRAW) == 1) {
+            if (user.getCoins().compareTo(TipBot.MIN_WITHDRAW) == 0 || user.getCoins().compareTo(TipBot.MIN_WITHDRAW) == -1) {
                 bot.sendIRC().message(user.getUsername(), "Hey! The Tipbot is closing down, and I noticed you still have some coins you could withdraw. Please use !withdraw [YourAddress][Amount]. The withdrawel fee is 0.1BLK, so please take that in consideration.");
             }
 
